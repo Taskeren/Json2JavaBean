@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Json -> JavaBean</title>
+        <meta name="description" content="json2javabean,json2bean,json,java,javabean">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dreamer-Paul/Kico-Style@master/kico.css">
+        <style>
+            * {
+                font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, 'Microsoft YaHei';
+            }
+
+            textarea {
+                font-family: 'Courier New', Courier, 'Microsoft YaHei', monospace;
+            }
+
+            textarea {
+                width: 100%;
+                height: 20em;
+            }
+
+            h1, h3 {
+                margin-bottom: 0;
+            }
+        </style>
+        <script src="json2bean.js"></script>
+        <script>
+            function update() {
+                var update = json2bean(document.getElementById("json").value);
+                if(update != "") {
+                    document.getElementById("javabean").value = update;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="wrap min">
+            <div style="text-align: center;">
+                <h1>Json2Bean</h1>
+                <h3>Coder: Taskeren</h3>
+                <span>本项目为Gson编写</span>
+            </div>
+            <div>
+                <textarea id="json" placeholder="输入Json示例获取JavaBeanClass" onchange="javascript:update()" oninput="javascript:update()"></textarea>
+                <textarea id="javabean" readonly></textarea>
+            </div>
+        </div>
+    </body>
+</html>
