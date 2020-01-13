@@ -56,10 +56,12 @@ function json2bean(str) {
         var key = i;
         var val = json[i];
 
+        var isArray = val instanceof Array;
+
         var type = capitalize(typeof(val));
         var fieldname = camelize(key);
 
-        var line = annotationSerialize.replace("{key}", key) + "\n" + "protected " + type + " " + fieldname + ";";
+        var line = annotationSerialize.replace("{key}", key) + "\n" + "protected " + type + (isArray ? "[]" : "") + " " + fieldname + ";";
         final += line + "\n\n";
     }
 
