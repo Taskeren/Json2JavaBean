@@ -38,9 +38,10 @@ const annotationSerialize = '@SerializedName(value = "{key}")';
 /**
  * 输入JSON输出JavaBean类
  * @param {String} str json输入
+ * @param {String} array_type 数组类型
  * @returns {String}
  */
-function json2bean(str) {
+function json2bean(str, array_type) {
     var json;
     try {
         json = JSON.parse(str);
@@ -61,9 +62,29 @@ function json2bean(str) {
         var type = capitalize(typeof(val));
         var fieldname = camelize(key);
 
-        var line = annotationSerialize.replace("{key}", key) + "\n" + "protected " + type + (isArray ? "[]" : "") + " " + fieldname + ";";
+        var line = annotationSerialize.replace("{key}", key) + "\n" + "protected " + (isArray ? arrayType(type, array_type) : type) + " " + fieldname + ";";
         final += line + "\n\n";
     }
 
     return final.trim();
+}
+
+/**
+ * 将Type转为数组
+ * @param {String} type 
+ * @param {String} array_type
+ */
+function arrayType(type, array_type) {
+    array_type = array_type.toLowerCase();
+    
+    if (array_type == "array") {
+        return type + "[]";
+    }
+    else if (array_type == "list") {
+        return "List<" + type + ">";
+    }
+    else {
+        console.error("array_type cannot be "+array_type);
+        return null;
+    }
 }

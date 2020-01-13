@@ -28,7 +28,7 @@
         <script src="json2bean.js"></script>
         <script>
             function update() {
-                var update = json2bean(document.getElementById("json").value);
+                var update = json2bean(document.getElementById("json").value, document.getElementById("array_type").value);
                 if(update != "") {
                     document.getElementById("javabean").value = update;
                 }
@@ -41,6 +41,13 @@
                 <h1>Json2Bean</h1>
                 <h3>Coder: Taskeren</h3>
                 <span>本项目为Gson编写</span>
+            </div>
+            <div>
+                <span>数组类型：</span>
+                <select id="array_type" onchange="javascript:update()">
+                    <option>List</option>
+                    <option>Array</option>
+                </select>
             </div>
             <div>
                 <textarea id="json" placeholder="输入Json示例获取JavaBeanClass" onchange="javascript:update()" oninput="javascript:update()"></textarea>
